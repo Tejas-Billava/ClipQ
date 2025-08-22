@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   backend:
     build: .
@@ -9,6 +7,8 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
+    env_file:
+      - .env # Load environment variables including GOOGLE_API_KEY
     environment:
       - PYTHONUNBUFFERED=1
 
@@ -22,7 +22,6 @@ services:
       - .:/app
     environment:
       - PYTHONUNBUFFERED=1
-      # allow Streamlit to talk to API
       - CLIPQ_API_URL=http://backend:8000
     depends_on:
       - backend
